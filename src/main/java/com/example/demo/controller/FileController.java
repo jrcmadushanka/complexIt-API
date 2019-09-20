@@ -4,6 +4,8 @@ import com.example.demo.file_reader.FileReaderLocal;
 import com.example.demo.mail_tools.Measure;
 import com.example.demo.payload.UploadFileResponse;
 import com.example.demo.service.FileStorageService;
+import com.google.gson.Gson;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,31 +29,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class FileController {
 
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
-
+    //ArrayList<List<String>> cs = null;
+    String statements[];
+    String complexity[];
+	/* List<String> inner = new ArrayList<String>; */
+    String cs;
+    
     @Autowired
     private FileStorageService fileStorageService;
     
     @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
+    public String uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = fileStorageService.storeFile(file);
-        
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
-                .path(fileName)
-                .toUriString();
-       
+
         String filePath = "E:\\Y0302\\SMP\\complexIt\\uploads\\";
  
         Measure measure = new Measure(filePath + fileName);
         
-        measure.start();
-        
-        return new UploadFileResponse(fileName, fileDownloadUri,
-                file.getContentType(), file.getSize());
+        cs = measure.start();
+        //String json = new Gson().toJson(cs);
+        return  cs;
     }
 
     @PostMapping("/uploadMultipleFiles")
-    public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+    public List< String> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         return Arrays.asList(files)
                 .stream()
                 .map(file -> uploadFile(file))

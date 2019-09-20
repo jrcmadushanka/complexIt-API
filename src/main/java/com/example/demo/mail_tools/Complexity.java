@@ -31,8 +31,6 @@ public class Complexity {
 		int complexity = 0;
 		String[] words = statement.split(" ");
 		List<String> wordList = new ArrayList<>(Arrays.asList(words));
-
-		System.out.println(words);
 		
 		String[] strings = statement.split("\"");
 
