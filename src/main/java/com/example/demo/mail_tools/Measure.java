@@ -22,41 +22,43 @@ public class Measure {
 	public Measure() {
 		super();
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "null", "unused" })
 	public String start() {
-		
+
 		FileReaderLocal reader = new FileReaderLocal(filePath);
-        Complexity complexityObj = new Complexity();
-        @SuppressWarnings("unused")
+		Complexity complexityObj = new Complexity();
+		@SuppressWarnings("unused")
 		List<String> complexityDueToSize = new ArrayList<String>();
-        ArrayList<List<String>> allComplexityDueToSize = new ArrayList<List<String>>();
-        
-        lines = reader.readFile(filePath);
-		String allJson ="";
-        if(lines != null) {
-        	
-        	numberOfLines = lines.size();
-        	
+		ArrayList<List<String>> allComplexityDueToSize = new ArrayList<List<String>>();
+		String list = "";
+
+		lines = reader.readFile(filePath);
+		String allJson = "";
+		if (lines != null) {
+
+			numberOfLines = lines.size();
+
 			for (String statement : lines) {
-				
-				complexityDueToSize = complexityObj.dueToSize(statement);
-				
-			        String json = new Gson().toJson(complexityDueToSize);
-				//System.out.println(complexityDueToSize.get(0));
-				if(complexityDueToSize != null) {
-					allJson = new Gson().toJson(json);
-				allComplexityDueToSize.add(complexityDueToSize);
+
+				if(!(statement.trim().startsWith("*") || statement.trim().startsWith("//") || statement.trim().equals("")))  {
+					list = complexityObj.dueToSize(statement);
+					String json = new Gson().toJson(complexityDueToSize);
+					// System.out.println(complexityDueToSize.get(0));
+					if (complexityDueToSize != null) {
+						allJson = new Gson().toJson(json);
+						allComplexityDueToSize.add(complexityDueToSize);
+					}
 				}
 			}
-			
-        }
-        
-        String response[] = new String[10];
-        String line[];
-        
-        Map<String, List<String>> aMap = new HashMap<String, List<String>>();
-      //  aMap.put("a" , Integer.valueOf(1));
+
+		}
+
+		String response[] = new String[10];
+		String line[];
+
+		Map<String, List<String>> aMap = new HashMap<String, List<String>>();
+		// aMap.put("a" , Integer.valueOf(1));
 		/*
 		 * int count = 1;
 		 * 
@@ -73,7 +75,7 @@ public class Measure {
 		 * 
 		 * for (String token : item) { System.out.print(token + ","); } } }
 		 */
-        
-        return allJson;
+
+		return list;
 	}
 }
