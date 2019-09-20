@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.file_reader.FileReaderLocal;
-import com.example.demo.mail_tools.Measure;
 import com.example.demo.payload.UploadFileResponse;
 import com.example.demo.service.FileStorageService;
 import org.slf4j.Logger;
@@ -39,12 +38,14 @@ public class FileController {
                 .path(fileName)
                 .toUriString();
        
-        String filePath = "E:\\Y0302\\SMP\\complexIt\\uploads\\";
- 
-        Measure measure = new Measure(filePath + fileName);
+        String filePath = "E:\\Y0302\\SMP\\complexIt\\uploads\\AccountController.java";
         
-        measure.start();
+        //System.out.println("E:\\Y0302\\SMP\\complexIt\\uploads\\AccountController.java" /*+ fileName*/);
+       
+        FileReaderLocal reader = new FileReaderLocal(filePath);
         
+        reader.readFile(filePath);
+
         return new UploadFileResponse(fileName, fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
