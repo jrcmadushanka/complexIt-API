@@ -43,8 +43,8 @@ public class Complexity {
 
 		String[] argLevel2 = { "new", "delete", "throw", "throws" };
 
-		tokens.add(0, Integer.toString(complexity));
-		tokens.add(1, "");
+		//tokens.add(0, Integer.toString(complexity));
+		//tokens.add(1, "");
 
 		for (String word : words) {
 			boolean numeric = true;
@@ -121,22 +121,26 @@ public class Complexity {
 			}
 		}
 
-		int stringCount = 0;
-
-		for (String s : strings) {
-			stringCount++;
-			if (stringCount % 2 == 0) {
-				if (!tokens.contains(s)) {
-					tokens.add(s);
-				}
-				complexity++;
-			}
-			continue;
-		}
-
-        tokens.set(0, Integer.toString(complexity));
-        tokens.set(1, statement);
-
+		/*
+		 * int stringCount = 0;
+		 * 
+		 * for (String s : strings) { stringCount++; if (stringCount % 2 == 0) { if
+		 * (!tokens.contains(s)) { tokens.add(s); } complexity++; } continue; }
+		 */
+		
+		/*
+		 * tokens.set(0, Integer.toString(complexity)); tokens.set(1, statement);
+		 */
+		
+        System.out.println("________________________________________________________________________________________________________________");
+        System.out.println(statement);
+        System.out.println("---Complexity Due to Size--- " + complexity);
+        System.out.println("----Tokens---- ");
+        for (String token : tokens) {
+			System.out.print(token + " , ");
+		} 
+        System.out.println("");
+        System.out.println("________________________________________________________________________________________________________________");
 		return tokens;
 	}
 }
