@@ -8,18 +8,17 @@ import java.util.Map;
 import com.example.demo.file_reader.FileReaderLocal;
 import com.google.gson.Gson;
 
-public class Measure {
-
+public class MeasureControllStructure {
 	String filePath = "";
 	List<String> lines = null;
 	int numberOfLines = 0;
 
-	public Measure(String filePath) {
+	public MeasureControllStructure(String filePath) {
 		super();
 		this.filePath = filePath;
 	}
 
-	public Measure() {
+	public MeasureControllStructure() {
 		super();
 	}
 	
@@ -27,11 +26,9 @@ public class Measure {
 	public String start() {
 		
 		FileReaderLocal reader = new FileReaderLocal(filePath);
-        Complexity complexityObj = new Complexity();
+        Complexity controllObj = new Complexity();
         @SuppressWarnings("unused")
-		List<String> complexityDueToSize = new ArrayList<String>();
-        List<String> complexityDueToControllStructure = new ArrayList<String>();
-        ArrayList<List<String>> allComplexityDueToSize = new ArrayList<List<String>>();
+		List<String> complexityDueToControllStructure = new ArrayList<String>();
         ArrayList<List<String>> allComplexityDueToControllStructure = new ArrayList<List<String>>();
         
         lines = reader.readFile(filePath);
@@ -42,17 +39,9 @@ public class Measure {
         	
 			for (String statement : lines) {
 				
-				complexityDueToSize = complexityObj.dueToSize(statement);
-				complexityDueToControllStructure = complexityObj.dueToControllStructure(statement);
+				complexityDueToControllStructure = controllObj.dueToControllStructure(statement);
 				
-			        String json = new Gson().toJson(complexityDueToSize);
-				//System.out.println(complexityDueToSize.get(0));
-				if(complexityDueToSize != null) {
-					allJson = new Gson().toJson(json);
-				allComplexityDueToSize.add(complexityDueToSize);
-				}
-				
-				String jsonC = new Gson().toJson(complexityDueToControllStructure);
+			        String json = new Gson().toJson(complexityDueToControllStructure);
 				//System.out.println(complexityDueToSize.get(0));
 				if(complexityDueToControllStructure != null) {
 					allJson = new Gson().toJson(json);
