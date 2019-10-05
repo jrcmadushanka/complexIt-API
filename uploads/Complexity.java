@@ -22,8 +22,8 @@ public class Complexity {
 	List<String> method_list = new ArrayList<>();
 	List<String> primitive_types = ComplexitySettings.PRIMITIVE_TYPES;
 	List<String> conditional_logical_operations = ComplexitySettings.CONDITIONAL_LOGICAL_OPERATORS;
- StringBuilder smObj = new StringBuilder();
-	
+	StringBuilder smObj = new StringBuilder();
+
 	public String dueToSize(String statement) {
 
 		List<String> line = new ArrayList<String>();
@@ -32,7 +32,7 @@ public class Complexity {
 		int complexity = 0;
 		String[] words = statement.split(" ");
 		List<String> wordList = new ArrayList<>(Arrays.asList(words));
-		
+
 		String[] strings = statement.split("\"");
 
 		String[] args = { "- ", "*", "/ ", "% ", "++", "--", "== ", "!=", " > ", " < ", ">=", "<=", "&&", "||", "!",
@@ -44,8 +44,8 @@ public class Complexity {
 
 		String[] argLevel2 = { "new", "delete", "throw", "throws" };
 
-		//tokens.add(0, Integer.toString(complexity));
-		//tokens.add(1, "");
+		// tokens.add(0, Integer.toString(complexity));
+		// tokens.add(1, "");
 
 		for (String word : words) {
 			boolean numeric = true;
@@ -128,11 +128,11 @@ public class Complexity {
 		 * for (String s : strings) { stringCount++; if (stringCount % 2 == 0) { if
 		 * (!tokens.contains(s)) { tokens.add(s); } complexity++; } continue; }
 		 */
-		
+
 		/*
 		 * tokens.set(0, Integer.toString(complexity)); tokens.set(1, statement);
 		 */
-		
+
 		/*
 		 * System.out.println(
 		 * "________________________________________________________________________________________________________________"
@@ -144,19 +144,19 @@ public class Complexity {
 		 * "________________________________________________________________________________________________________________"
 		 * );
 		 */
-		
 
-		  smObj.append(
-		  "________________________________________________________________________________________________________________"
-		  );  smObj.append(statement);
-		  smObj.append("---Complexity Due to Size--- " + complexity);
-		  smObj.append("----Tokens---- "); for (String token : tokens) {
-			  smObj.append(token + " , "); } System.out.println("");
-			  smObj.append(
-		  "________________________________________________________________________________________________________________"
-		  );
-		 
-		 
+		smObj.append("<br/>_________________________________________________").append("<br/>");
+		smObj.append(statement).append("<br/>");
+		smObj.append("---Complexity Due to Size--- " + complexity).append("<br/>");		
+		smObj.append("----Tokens---- ").append("<br/>");		
+		for (String token : tokens) {
+			smObj.append(token + " , ");
+		}
+		smObj.append("<br/>");;
+		smObj.append(
+				"\n__________________________________________________").append("<br/>");
+
 		return smObj.toString();
+		
 	}
 }

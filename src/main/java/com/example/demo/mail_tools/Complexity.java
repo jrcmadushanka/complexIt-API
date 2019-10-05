@@ -68,6 +68,7 @@ public class Complexity {
 			}
 
 			for (String arg : argLevel2) {
+				
 				if (word.contains(arg)) {
 
 					if (!tokens.contains(arg)) {
